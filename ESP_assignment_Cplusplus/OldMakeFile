@@ -1,0 +1,23 @@
+EXE = linear-solver
+SRC = $(wildcard *.cpp)
+OBJ = $(addprefix build/,$(SRC:.c=.o))
+
+all: $(EXE)
+
+$(EXE): $(OBJ)
+	@echo 'Building target: $(EXE)'
+	@echo 'Invoking: C Linker'
+	g++ -c: $(EXE) $(OBJ)
+	@echo 'Finished building target: $(EXE)'
+	@echo ' '
+
+build/%.o: %.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: GCC C Compiler'
+	g++ -c -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+clean:
+	rm -f build/*.o $(EXE)* 
+
